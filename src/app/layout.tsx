@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-
+import NavBar from '../components/NavBar'; // Adjust the path accordingly if not using absolute imports
 
 export const metadata: Metadata = {
   title: "SnapZoška",
@@ -15,8 +15,10 @@ export default function RootLayout({
   return (
     <html lang="sk">
       <body >
-        {children}
+          <main>{children}</main>
+          <NavBar />
       </body>
     </html>
   );
 }
+
