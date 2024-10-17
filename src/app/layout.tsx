@@ -1,10 +1,13 @@
-import type { Metadata } from "next";
+// src/app/layout.tsx
+
+import { Metadata } from "next";
 import "./globals.css";
-import NavBar from '../components/NavBar'; // Adjust the path accordingly if not using absolute imports
+import Navbar from "@/components/NavBar";
+import AuthProvider from "../components/AuthProvider";
 
 export const metadata: Metadata = {
   title: "SnapZoška",
-  description: "Created by Daniel Fučík",
+  description: "Created by students of SPŠE Zochova 9, Bratislava",
 };
 
 export default function RootLayout({
@@ -14,11 +17,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="sk">
-      <body >
-          <main>{children}</main>
-          <NavBar />
+      <body>
+        <AuthProvider>
+          <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+            <main style={{ flexGrow: 1 }}>
+              {children}
+            </main>
+          </div>
+          <Navbar /> 
+        </AuthProvider>
       </body>
     </html>
   );
 }
-

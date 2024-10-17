@@ -1,31 +1,14 @@
+// src/app/(home)/page.tsx
 
-//src/app/page.tsx
+"use client"; // This ensures we can use hooks like useSession
 
-
-import Typography from '@mui/material/Typography';
-
-export const metadata = { title: 'Domov | ZoškaSnap' };
+import { useSession } from "next-auth/react";
+import HomeView from "../../sections/HomeView"; // Update the import path to sections
+import HomeViewAuth from "../../sections/HomeViewAuth"; // Update the import path to sections
 
 export default function Home() {
+  const { data: session } = useSession();
 
-  return (
-  
-      <Typography> Domovská stránka</Typography>
-
-  );
+  // Render HomeView for unauthenticated users and HomeViewAuth for authenticated users
+  return session ? <HomeViewAuth session={session} /> : <HomeView />;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
