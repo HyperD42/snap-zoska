@@ -12,9 +12,54 @@ import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import Link from 'next/link';
 import Avatar from '@mui/material/Avatar'; // Import Avatar for profile picture
 
+// Define a type for navigation items
+interface NavItem {
+  label: string;
+  icon: React.ReactNode;
+  href: string;
+  key: string; // Ensure each item has a unique key
+}
+
+// Function to create BottomNavigationAction components
+const createNavAction = (item: NavItem) => (
+  <BottomNavigationAction
+    key={item.key}
+    label={item.label}
+    icon={item.icon}
+    component={Link}
+    href={item.href}
+  />
+);
+
 export default function NavBar() {
   const { data: session } = useSession(); // Get user session
   const [value, setValue] = React.useState(0);
+
+  // Non-authenticated nav items
+  const nonAuthNavItems: NavItem[] = [
+    { label: "Domov", icon: <HomeIcon />, href: "/", key: "home" },
+    { label: "Prispevky", icon: <PostAddIcon />, href: "/prispevok", key: "posts" },
+    { label: "Prihlásenie", icon: <LoginIcon />, href: "/auth/prihlasenie", key: "sign-in" },
+    { label: "Registrácia", icon: <AppRegistrationIcon />, href: "/auth/registracia", key: "register" },
+  ];
+
+  // Authenticated nav items
+  const authNavItems: NavItem[] = [
+    { label: "Domov", icon: <HomeIcon />, href: "/", key: "home" },
+    { label: "Prispevky", icon: <PostAddIcon />, href: "/prispevok", key: "posts" },
+    {
+      label: "Profil",
+      icon: (
+        <Avatar
+          alt={session?.user?.name || "User"}
+          src={session?.user?.image || "/default-avatar.png"}
+        />
+      ),
+      href: "/profil",
+      key: "profile",
+    },
+    { label: "Odhlásiť sa", icon: <LoginIcon />, href: "/auth/odhlasenie", key: "sign-out" },
+  ];
 
   return (
     <Box sx={{ width: '100%', position: 'fixed', bottom: 0 }}>
@@ -25,50 +70,8 @@ export default function NavBar() {
           setValue(newValue);
         }}
       >
-        {/* Home */}
-        <BottomNavigationAction label="Domov" icon={<HomeIcon />} component={Link} href="/" />
-
-        {/* Posts */}
-        <BottomNavigationAction label="Prispevky" icon={<PostAddIcon />} component={Link} href="/prispevok" />
-
-        {/* Conditional rendering based on user session */}
-        {!session ? (
-          // Using an array to avoid fragment issue
-          [
-            <BottomNavigationAction
-              key="sign-in"
-              label="Prihlásenie" // Label for Sign In
-              icon={<LoginIcon />} // Login icon
-              component={Link} // Link to sign-in page
-              href="/auth/prihlasenie"
-            />,
-            <BottomNavigationAction
-              key="register"
-              label="Registrácia" // Label for Register
-              icon={<AppRegistrationIcon />} // Registration icon
-              component={Link} // Link to registration page
-              href="/auth/registracia"
-            />,
-          ]
-        ) : (
-          // Using an array to avoid fragment issue
-          [
-            <BottomNavigationAction
-              key="profile"
-              label="Profil" // Label for profile
-              icon={<Avatar alt={session.user?.name || "User"} src={session.user?.image || "/default-avatar.png"} />}
-              component={Link}
-              href="/profil" // Link to profile page
-            />,
-            <BottomNavigationAction
-              key="sign-out"
-              label="Odhlásiť sa" // Label for Sign Out
-              icon={<LoginIcon />} // Use Login icon for sign out
-              component={Link} // Use Link for sign out
-              href="/auth/odhlasenie" // Link to sign out page
-            />,
-          ]
-        )}
+        {/* Render non-authenticated or authenticated nav items based on session */}
+        {(session ? authNavItems : nonAuthNavItems).map(createNavAction)}
       </BottomNavigation>
     </Box>
   );

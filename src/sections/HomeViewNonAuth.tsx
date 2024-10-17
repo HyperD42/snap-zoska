@@ -1,4 +1,4 @@
-// sections/HomeView.tsx
+// sections/HomeViewNonAuth.tsx
 
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
