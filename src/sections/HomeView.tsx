@@ -1,8 +1,6 @@
 // sections/HomeView.tsx
 
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import { signIn } from "next-auth/react"; // Import signIn from NextAuth
 
 export default function HomeView() {
   return (
