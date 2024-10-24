@@ -1,6 +1,5 @@
 // src/app/(home)/page.tsx
 
-import { useSession } from "next-auth/react";
 import HomeView from "../../sections/HomeView"; // Update the import path to sections
 import HomeViewAuth from "../../sections/HomeViewAuth"; // Update the import path to sections
 import { getServerSession } from "next-auth";
