@@ -9,5 +9,5 @@ export default async function Home() {
   const session = await getServerSession(authOptions);
 
   // Render HomeView for unauthenticated users and HomeViewAuth for authenticated users
-  return session ? <HomeViewAuth session={session} /> : <HomeView />;
+  return session ? <HomeViewAuth /> : <HomeView />;
 }

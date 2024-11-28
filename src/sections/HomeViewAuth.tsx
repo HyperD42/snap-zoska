@@ -1,12 +1,12 @@
 import Typography from "@mui/material/Typography";
-import { Session } from "next-auth"; // Import Session type from next-auth
 
 // Define the props interface
 
-export default function HomeViewAuth({ session }: { session: Session }) {
+export default function HomeViewAuth() {
   return (
     <div>
-      <Typography variant="h4">Vitajte späť, {session?.user?.name}!</Typography>
+      <Typography variant="h4">Príspevky</Typography>
+      <Typography variant="body1">žiadne príspevky ešte neexistujú</Typography>
     </div>
   );
 }

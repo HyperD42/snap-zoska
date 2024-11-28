@@ -7,7 +7,7 @@ import AuthProvider from "../components/AuthProvider";
 
 export const metadata: Metadata = {
   title: "SnapZoška",
-  description: "Created by students of SPŠE Zochova 9, Bratislava",
+  description: "Created by Daniel Fučík of SPŠE Zochova 9, Bratislava",
 };
 
 export default function RootLayout({

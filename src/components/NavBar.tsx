@@ -10,6 +10,7 @@ import PostAddIcon from '@mui/icons-material/PostAdd';
 import LoginIcon from '@mui/icons-material/Login';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import Link from 'next/link';
+import InfoIcon from '@mui/icons-material/Info';
 import Avatar from '@mui/material/Avatar'; // Import Avatar for profile picture
 
 // Define a type for navigation items
@@ -38,7 +39,7 @@ export default function NavBar() {
   // Non-authenticated nav items
   const nonAuthNavItems: NavItem[] = [
     { label: "Domov", icon: <HomeIcon />, href: "/", key: "home" },
-    { label: "Prispevky", icon: <PostAddIcon />, href: "/prispevok", key: "posts" },
+    { label: "GDPR", icon: < InfoIcon/>, href: "/gdpr", key: "gdpr" },
     { label: "Prihlásenie", icon: <LoginIcon />, href: "/auth/prihlasenie", key: "sign-in" },
     { label: "Registrácia", icon: <AppRegistrationIcon />, href: "/auth/registracia", key: "register" },
   ];
