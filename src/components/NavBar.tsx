@@ -33,7 +33,7 @@ const createNavAction = (item: NavItem) => (
     label={item.label}
     icon={item.icon}
     component={Link}
-    href={item.href}
+    href={item.href} // Set the color to secondary
   />
 );
 
@@ -42,9 +42,12 @@ export default function NavBar() {
   const { data: session } = useSession(); // Get user session
   const [value, setValue] = React.useState(0);
 
+  // Log current theme secondary color to verify
+  console.log("Secondary color:", theme.palette.secondary.main);
+
   // Non-authenticated nav items
   const nonAuthNavItems: NavItem[] = [
-    { label: "Domov", icon: <HomeIcon />, href: "/", key: "home" },
+    { label: "Domov", icon: <HomeIcon />, href: "/", key: "home", },
     { label: "O Mne", icon: <InfoIcon />, href: "/o-mne", key: "about" },
     { label: "Registrácia", icon: <AppRegistrationIcon />, href: "/auth/registracia", key: "register" },
     { label: "Prihlásenie", icon: <LoginIcon />, href: "/auth/prihlasenie", key: "sign-in" },

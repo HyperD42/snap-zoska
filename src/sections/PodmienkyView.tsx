@@ -38,7 +38,6 @@ export default function PodmienkyView() {
       </Typography>
       <Button
         variant="outlined"
-        color='secondary'
         startIcon={<ArrowBackIcon />}
         onClick={handleBack}
         sx={{ marginBottom: '1rem' }}

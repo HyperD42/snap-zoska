@@ -75,7 +75,6 @@ export default function Registracia() {
       {/* Google Register Button */}
       <Button
         variant="outlined"
-        color="secondary"
         onClick={handleRegisterGoogle} // Calls the conditional handler
         fullWidth
         style={{ marginTop: "1rem" }}
@@ -87,7 +86,6 @@ export default function Registracia() {
       {/* Nonfunctional GitHub Register Button */}
       <Button
         variant="outlined"
-        color="secondary"
         onClick={handleRegisterGitHub} // Calls the conditional handler
         fullWidth
         style={{ marginTop: "1rem" }}

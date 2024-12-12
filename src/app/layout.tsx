@@ -23,8 +23,7 @@ export default function RootLayout({
     <html lang="sk">
       <body>
         <ThemeModeProvider>
-          <CssBaseline />
-          <Paper elevation={0} sx={{ height: "100vh" }} square>
+          
             <AuthProvider>
               <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
                 <main style={{ flexGrow: 1 }}>
@@ -35,7 +34,6 @@ export default function RootLayout({
               </div>
               <Navbar />
             </AuthProvider>
-          </Paper>
         </ThemeModeProvider>
       </body>
     </html>

@@ -35,7 +35,6 @@ export default function GdprView() {
       </Typography>
       <Button
         variant="outlined"
-        color='secondary'
         startIcon={<ArrowBackIcon />}
         onClick={handleBack}
         sx={{ marginBottom: '1rem' }}

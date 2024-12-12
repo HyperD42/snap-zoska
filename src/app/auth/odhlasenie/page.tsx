@@ -9,7 +9,7 @@ export default function Odhlasenie() {
   return (
     <>
       <Typography variant="h4">Odhlásenie</Typography>
-      <Button variant="contained" color="secondary" onClick={() => signOut()}>
+      <Button variant="contained" onClick={() => signOut()}>
         Odhlásiť sa
       </Button>
     </>
