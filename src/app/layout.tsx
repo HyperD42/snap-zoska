@@ -24,11 +24,7 @@ export default function RootLayout({
       <body>
         <ThemeModeProvider>
           <AuthProvider>
-            <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-              <main style={{ flexGrow: 1 }}>
-                {children}
-              </main>
-            </div>
+            {children}
             <Navbar />
           </AuthProvider>
         </ThemeModeProvider>
