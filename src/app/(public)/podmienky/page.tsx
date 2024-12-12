@@ -1,16 +1,8 @@
-//src/app/podmienky/page.tsx
+// src/app/gdpr/page.tsx
+import PodmienkyView from "@/sections/PodmienkyView";
 
+export const metadata = { title: 'Gdpr | ZoškaSnap' };
 
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-
-export const metadata = { title: 'Podmienky | ZoškaSnap' };
-
-export default function Home() {
-
-  return (
-    <Container>
-      <Typography> Podmienky používania</Typography>
-    </Container>
-  );
+export default function PodmienkyPage() {
+  return <PodmienkyView />;
 }

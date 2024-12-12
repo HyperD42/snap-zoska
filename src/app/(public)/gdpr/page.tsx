@@ -1,16 +1,7 @@
-
-//src/app/gdpr/page.tsx
-
-
-import Typography from '@mui/material/Typography';
+import GdprView from '../../../sections/GdprView';
 
 export const metadata = { title: 'Gdpr | ZoškaSnap' };
 
-export default function Gdpr() {
-
-  return (
-  
-      <Typography> Gdpr stránka</Typography>
-
-  );
+export default function GdprPage() {
+  return <GdprView />;
 }

@@ -24,7 +24,7 @@ export default function Prihlasenie() {
       {/* Google Login Button */}
       <Button
         variant="outlined"
-        color="primary"
+        color="secondary"
         onClick={() => signIn("google")}
         fullWidth
         style={{ marginTop: "1rem" }}
@@ -36,7 +36,7 @@ export default function Prihlasenie() {
       {/* Nonfunctional GitHub Login Button */}
       <Button
         variant="outlined"
-        color="primary"
+        color="secondary"
         onClick={() => {}}
         fullWidth
         style={{ marginTop: "1rem" }}

@@ -1,12 +1,9 @@
-import Typography from "@mui/material/Typography";
-
 // Define the props interface
+
+import { redirect } from "next/navigation";
 
 export default function HomeViewAuth() {
   return (
-    <div>
-      <Typography variant="h4">Príspevky</Typography>
-      <Typography variant="body1">žiadne príspevky ešte neexistujú</Typography>
-    </div>
+    redirect("/prispevok")
   );
 }

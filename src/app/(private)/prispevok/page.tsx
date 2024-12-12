@@ -7,8 +7,9 @@ export const metadata = { title: 'List Prispevkov | ZoškaSnap' };
 export default function PostList() {
 
   return (
-  
-      <Typography>List Prispevkov</Typography>
-
+    <>
+      <Typography variant="h4">Príspevky</Typography>
+      <Typography variant="body1">žiadne príspevky ešte neexistujú</Typography>
+    </>
   );
 }

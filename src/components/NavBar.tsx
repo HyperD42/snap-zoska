@@ -7,15 +7,12 @@ import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import HomeIcon from '@mui/icons-material/Home';
-import PostAddIcon from '@mui/icons-material/PostAdd';
 import LoginIcon from '@mui/icons-material/Login';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import Link from 'next/link';
 import InfoIcon from '@mui/icons-material/Info';
 import SearchIcon from '@mui/icons-material/Search';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
-import ListAltIcon from '@mui/icons-material/ListAlt';
-import GavelIcon from '@mui/icons-material/Gavel';
 import AddIcon from '@mui/icons-material/Add';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode'; // Import LightModeIcon
@@ -48,17 +45,14 @@ export default function NavBar() {
   // Non-authenticated nav items
   const nonAuthNavItems: NavItem[] = [
     { label: "Domov", icon: <HomeIcon />, href: "/", key: "home" },
-    { label: "GDPR", icon: <GavelIcon />, href: "/gdpr", key: "gdpr" },
     { label: "O Mne", icon: <InfoIcon />, href: "/o-mne", key: "about" },
-    { label: "Podmienky", icon: <ListAltIcon />, href: "/podmienky", key: "terms" },
-    { label: "Prihlásenie", icon: <LoginIcon />, href: "/auth/prihlasenie", key: "sign-in" },
     { label: "Registrácia", icon: <AppRegistrationIcon />, href: "/auth/registracia", key: "register" },
+    { label: "Prihlásenie", icon: <LoginIcon />, href: "/auth/prihlasenie", key: "sign-in" },
   ];
 
   // Authenticated nav items
   const authNavItems: NavItem[] = [
-    { label: "Domov", icon: <HomeIcon />, href: "/", key: "home" },
-    { label: "Prispevky", icon: <PostAddIcon />, href: "/prispevok", key: "posts" },
+    { label: "Domov", icon: <HomeIcon />, href: "/prispevok", key: "home" },
     { label: "Hladanie", icon: <SearchIcon />, href: "/hladanie", key: "search" },
     { label: "Notifikacie", icon: <NotificationsActiveIcon />, href: "/notifikacie", key: "notifications" },
     { label: "Pridat", icon: <AddIcon />, href: "/pridat", key: "add" },

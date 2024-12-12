@@ -4,7 +4,7 @@ import { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/NavBar";
 import AuthProvider from "../components/AuthProvider";
-import { CssBaseline, Paper } from "@mui/material";
+import { Container, CssBaseline, Paper } from "@mui/material";
 import { ThemeModeProvider } from "../components/Themes";
 
 export const metadata: Metadata = {
@@ -22,17 +22,19 @@ export default function RootLayout({
   return (
     <html lang="sk">
       <body>
-      <ThemeModeProvider>
+        <ThemeModeProvider>
           <CssBaseline />
-          <Paper elevation={0} sx={{ height: "100vh"}} square>
-          <AuthProvider>
-            <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-              <main style={{ flexGrow: 1 }}>
-                {children}
-              </main>
-            </div>
-            <Navbar />
-          </AuthProvider>
+          <Paper elevation={0} sx={{ height: "100vh" }} square>
+            <AuthProvider>
+              <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+                <main style={{ flexGrow: 1 }}>
+                  <Container>
+                    {children}
+                  </Container>
+                </main>
+              </div>
+              <Navbar />
+            </AuthProvider>
           </Paper>
         </ThemeModeProvider>
       </body>
