@@ -5,7 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/NavBar";
 import AuthProvider from "../components/AuthProvider";
 import { Container, CssBaseline, Paper } from "@mui/material";
-import { ThemeModeProvider } from "../components/Themes";
+import { ThemeModeProvider } from "../components/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "SnapZoška",
@@ -23,17 +23,14 @@ export default function RootLayout({
     <html lang="sk">
       <body>
         <ThemeModeProvider>
-          
-            <AuthProvider>
-              <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-                <main style={{ flexGrow: 1 }}>
-                  <Container>
-                    {children}
-                  </Container>
-                </main>
-              </div>
-              <Navbar />
-            </AuthProvider>
+          <AuthProvider>
+            <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+              <main style={{ flexGrow: 1 }}>
+                {children}
+              </main>
+            </div>
+            <Navbar />
+          </AuthProvider>
         </ThemeModeProvider>
       </body>
     </html>

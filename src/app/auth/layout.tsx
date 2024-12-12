@@ -1,5 +1,5 @@
 "use client"
-import { useThemeMode } from "../../components/Themes"; // Import your theme hook
+import { useThemeMode } from "../../components/ThemeProvider"; // Import your theme hook
 import "../globals.css";
 
 export default function AuthLayout({

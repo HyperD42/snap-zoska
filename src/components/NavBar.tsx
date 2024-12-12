@@ -2,7 +2,7 @@
 
 import { useSession } from "next-auth/react"; // Import only useSession
 import * as React from 'react';
-import { useThemeMode } from "../components/Themes"; // Import for the theme context
+import { useThemeMode } from "./ThemeProvider"; // Import for the theme context
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
