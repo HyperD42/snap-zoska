@@ -4,7 +4,6 @@ import { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/NavBar";
 import AuthProvider from "../components/AuthProvider";
-import { Container, CssBaseline, Paper } from "@mui/material";
 import { ThemeModeProvider } from "../components/ThemeProvider";
 
 export const metadata: Metadata = {
