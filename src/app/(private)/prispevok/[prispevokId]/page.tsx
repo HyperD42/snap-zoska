@@ -1,5 +1,6 @@
 import { prisma } from '@/app/api/auth/[...nextauth]/prisma';
 import { Typography, Box, CardMedia, Button, Container } from '@mui/material';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 interface PostProps {
@@ -61,23 +62,28 @@ export default async function PostDetail({ params }: PostProps) {
           <strong>Posted on:</strong> {formattedDate}
         </Typography>
 
-        <Button
-          href="/"
-          variant="contained"
-          color="primary"
-          sx={{
-            display: 'block',
-            width: '100%',
-            padding: '10px 0',
-            fontSize: '16px',
-            fontWeight: 'bold',
-            borderRadius: 2,
-            textTransform: 'none',
-            textAlign: 'center',
-          }}
-        >
-          Back to Post List
-        </Button>
+        {/* Using Link for client-side navigation */}
+        <Link href="/" passHref style={{ textDecoration: 'none' }}> {/* Remove underline from the link */}
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{
+              display: 'block',
+              width: '100%',
+              padding: '10px 0',
+              fontSize: '16px',
+              fontWeight: 'bold',
+              borderRadius: 2,
+              textTransform: 'none',
+              textAlign: 'center',
+              '&:hover': {
+                backgroundColor: 'primary.dark', // Hover effect
+              },
+            }}
+          >
+            Back to Post List
+          </Button>
+        </Link>
       </Box>
     </Container>
   );
