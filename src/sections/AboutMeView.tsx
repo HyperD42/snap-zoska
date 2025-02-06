@@ -5,8 +5,11 @@ import Link from 'next/link';
 export default function AboutMeView() {
     return (
     <Container>
-        <Typography variant='h4'>O Mne</Typography><Typography>
-            <Link href="https://zochova.sk/">Moja Škola</Link></Typography>
+        <Typography variant='h4'>O Mne</Typography>
+            
+            <Typography><Link href="https://zochova.sk/">Moja Škola</Link></Typography>
+            <Typography><Link href="https://www.facebook.com/spsezochova/">Facebook</Link></Typography>
+            
     </Container>
     )
 }
