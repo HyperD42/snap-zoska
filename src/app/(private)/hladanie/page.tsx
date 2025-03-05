@@ -1,110 +1,123 @@
-'use client';
+"use client";
 
 //src/app/hladanie/page.tsx
 
-import { useState, useEffect } from 'react';
-import { 
-  Typography, 
-  TextField, 
-  Box, 
-  Avatar, 
-  List, 
-  ListItem, 
-  ListItemAvatar, 
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import {
+  Box,
+  TextField,
+  Typography,
+  List,
+  ListItem,
   ListItemText,
-  InputAdornment
-} from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
-import Link from 'next/link';
+  ListItemAvatar,
+  Avatar,
+  CircularProgress,
+  Link as MuiLink,
+} from "@mui/material";
 
-export default function Search() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [profiles, setProfiles] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+interface User {
+  id: string;
+  name: string | null;
+  email: string;
+  image: string | null;
+}
 
-  const fetchProfiles = async (query?: string) => {
-    setIsLoading(true);
-    try {
-      const url = query 
-        ? `/api/search?q=${encodeURIComponent(query)}`
-        : '/api/search';
-      const response = await fetch(url);
-      const data = await response.json();
-      setProfiles(data);
-    } catch (error) {
-      console.error('Search error:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+export default function SearchPage() {
+  const { status } = useSession();
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [users, setUsers] = useState<User[]>([]);
+  const [isSearching, setIsSearching] = useState(false);
 
   useEffect(() => {
-    fetchProfiles();
-  }, []);
-
-  const handleSearch = async (query: string) => {
-    setSearchQuery(query);
-    if (query.length === 0) {
-      fetchProfiles();
-    } else if (query.length >= 2) {
-      fetchProfiles(query);
+    if (status === "unauthenticated") {
+      router.push("/auth/prihlasenie");
     }
-  };
+  }, [status, router]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      setIsSearching(true);
+      try {
+        const response = await fetch(`/api/search?q=${encodeURIComponent(searchQuery)}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch users");
+        }
+        const data = await response.json();
+        setUsers(data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      } finally {
+        setIsSearching(false);
+      }
+    };
+
+    fetchUsers();
+  }, [searchQuery]);
+
+  if (status === "loading") {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100vh",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
-    <Box sx={{ p: 3, pb: 6, maxWidth: 600, mx: 'auto' }}>
-      <Typography variant="h4" sx={{ mb: 3, textAlign: 'center' }}>
-        Vyhladavanie
+    <Box sx={{ p: 3, pb: 10 }}>
+      <Typography variant="h4" gutterBottom>
+        Hľadanie
       </Typography>
-      
       <TextField
         fullWidth
         variant="outlined"
-        placeholder="Vyhľadaj používateľa..."
+        placeholder="Hľadať používateľov..."
         value={searchQuery}
-        onChange={(e) => handleSearch(e.target.value)}
+        onChange={(e) => setSearchQuery(e.target.value)}
         sx={{ mb: 3 }}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          ),
-        }}
       />
-
-      <List>
-        {profiles.map((profile: any) => (
-          <Link 
-            key={profile.id}
-            href={`/profil/${profile.id}`}
-            style={{ textDecoration: 'none' }}
-          >
-            <ListItem 
+      {isSearching ? (
+        <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
+          <CircularProgress />
+        </Box>
+      ) : (
+        <List>
+          {users.map((user) => (
+            <ListItem
+              key={user.id}
+              component={MuiLink}
+              href={`/profil/${user.id}`}
               sx={{
-                borderRadius: 1,
-                mb: 1,
-                '&:hover': {
-                  backgroundColor: 'action.hover',
+                textDecoration: "none",
+                "&:hover": {
+                  backgroundColor: "action.hover",
                 },
-                cursor: 'pointer',
               }}
             >
               <ListItemAvatar>
                 <Avatar
-                  alt={profile.name}
-                  src={profile.image || "/default-avatar.png"}
-                  sx={{ width: 48, height: 48 }}
+                  alt={user.name || "User"}
+                  src={user.image || "/default-avatar.png"}
                 />
               </ListItemAvatar>
-              <ListItemText 
-                primary={profile.name}
-                secondary={profile.email}
+              <ListItemText
+                primary={user.name || "Unnamed User"}
+                secondary={user.email}
               />
             </ListItem>
-          </Link>
-        ))}
-      </List>
+          ))}
+        </List>
+      )}
     </Box>
   );
 }

@@ -9,8 +9,7 @@ import {
   Card, 
   CardContent, 
   CardMedia,
-  Divider,
-  Stack
+  Divider
 } from '@mui/material';
 import { notFound } from 'next/navigation';
 
