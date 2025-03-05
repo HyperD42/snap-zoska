@@ -1,5 +1,6 @@
-import { Button, Container, Link, Typography, Box, Card, CardContent, CardMedia } from "@mui/material";
+import { Button, Container, Typography, Box, Card, CardContent, CardMedia } from "@mui/material";
 import { prisma } from "@/app/api/auth/[...nextauth]/prisma";
+import Link from 'next/link';
 
 const getPosts = async () => {
   const posts = await prisma.post.findMany({
@@ -54,9 +55,8 @@ export default async function HomeView() {
         </Box>
 
         <Typography sx={{marginTop: "1rem"}}>Registrujte sa, aby ste mohli pridať príspevky a zobraziť profil</Typography>
-        <Link href="/auth/registracia">
+        <Link href="/auth/registracia" style={{ textDecoration: 'none' }}>
           <Button
-            component="a"
             variant="contained"
             color="primary"
             sx={{

@@ -1,6 +1,7 @@
 import { prisma } from '@/app/api/auth/[...nextauth]/prisma';
-import { Typography, Card, CardContent, CardMedia, Box, Link as MuiLink } from '@mui/material';
+import { Typography, Card, CardContent, CardMedia, Box, Link as MuiLink, Avatar, Stack } from '@mui/material';
 import Link from 'next/link';
+import PostActions from '@/components/PostActions';
 
 export const metadata = { title: 'List Prispevkov | ZoškaSnap' };
 
@@ -43,7 +44,6 @@ export default async function PostList() {
               sx={{
                 width: '100%',
                 maxWidth: 600,
-                height: 400,
                 boxShadow: 3,
                 display: 'flex',
                 flexDirection: 'column',
@@ -51,6 +51,18 @@ export default async function PostList() {
                 cursor: 'pointer', // Indicate that the entire card is clickable
               }}
             >
+              <CardContent sx={{ padding: 1.5, paddingBottom: 1 }}>
+                <Stack direction="row" spacing={1} alignItems="center">
+                  <Avatar
+                    alt={post.user.name || "User"}
+                    src={post.user.image || "/default-avatar.png"}
+                    sx={{ width: 32, height: 32 }}
+                  />
+                  <Typography variant="subtitle2" sx={{ fontWeight: 'medium' }}>
+                    {post.user.name}
+                  </Typography>
+                </Stack>
+              </CardContent>
               {post.imageUrl && (
                 <CardMedia
                   component="img"
@@ -62,13 +74,11 @@ export default async function PostList() {
                   }}
                 />
               )}
-              <CardContent sx={{ flexGrow: 1, paddingBottom: 2 }}>
+              <CardContent sx={{ padding: 2 }}>
                 <Typography variant="h6" component="h2" sx={{ fontWeight: 'bold', marginBottom: 1 }}>
                   {post.caption}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {post.user.name}
-                </Typography>
+                <PostActions />
               </CardContent>
             </Card>
           </MuiLink>

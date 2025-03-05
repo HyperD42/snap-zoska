@@ -2,6 +2,7 @@ import { prisma } from '@/app/api/auth/[...nextauth]/prisma';
 import { Typography, Box, CardMedia, Button, Container } from '@mui/material';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import PostActions from '@/components/PostActions';
 
 interface PostProps {
   params: {
@@ -12,7 +13,7 @@ interface PostProps {
 const getPostById = async (id: string) => {
   const post = await prisma.post.findUnique({
     where: { id },
-    include: { user: true }, // Include user data with the post
+    include: { user: true },
   });
 
   if (!post) {
@@ -26,16 +27,14 @@ export default async function PostDetail({ params }: PostProps) {
   const post = await getPostById(params.prispevokId);
 
   if (!post) {
-    notFound(); // If the post doesn't exist, show a 404 page
+    notFound();
   }
-
-  const formattedDate = new Date(post.createdAt).toLocaleDateString(); // Format createdAt
 
   return (
     <Container maxWidth="md" sx={{ paddingTop: 4 }}>
       <Box sx={{ padding: 4, backgroundColor: 'background.paper', borderRadius: 2, boxShadow: 3 }}>
         <Typography variant="h3" sx={{ marginBottom: 2, fontWeight: 'bold', textAlign: 'center' }}>
-          {post.caption || 'No Caption'} {/* Display the caption or fallback to 'No Caption' */}
+          {post.caption || 'No Caption'}
         </Typography>
 
         {post.imageUrl && (
@@ -52,18 +51,18 @@ export default async function PostDetail({ params }: PostProps) {
           />
         )}
 
-        <Typography variant="h5" sx={{ marginBottom: 1, fontWeight: 'bold' }}>
-          {post.caption || 'No Caption'} {/* Display the caption or fallback to 'No Caption' */}
-        </Typography>
         <Typography variant="body1" color="text.secondary" sx={{ marginBottom: 2 }}>
           <strong>Posted by:</strong> {post.user.name}
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{ marginBottom: 3 }}>
-          <strong>Posted on:</strong> {formattedDate}
+          <strong>Posted on:</strong> {new Date(post.createdAt).toLocaleDateString()}
         </Typography>
 
-        {/* Using Link for client-side navigation */}
-        <Link href="/" passHref style={{ textDecoration: 'none' }}> {/* Remove underline from the link */}
+        <Box sx={{ mb: 3 }}>
+          <PostActions />
+        </Box>
+
+        <Link href="/" passHref style={{ textDecoration: 'none' }}>
           <Button
             variant="contained"
             color="primary"
@@ -77,7 +76,7 @@ export default async function PostDetail({ params }: PostProps) {
               textTransform: 'none',
               textAlign: 'center',
               '&:hover': {
-                backgroundColor: 'primary.dark', // Hover effect
+                backgroundColor: 'primary.dark',
               },
             }}
           >
