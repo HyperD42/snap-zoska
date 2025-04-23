@@ -1,6 +1,6 @@
 //src/app/profil/[id]/page.tsx
 
-import { prisma } from '@/app/api/auth/[...nextauth]/prisma';
+import { prisma } from '../../../../app/api/auth/[...nextauth]/prisma';
 import { 
   Box, 
   Typography, 

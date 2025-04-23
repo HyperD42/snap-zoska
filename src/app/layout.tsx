@@ -2,9 +2,10 @@
 
 import { Metadata } from "next";
 import "./globals.css";
-import Navbar from "@/components/NavBar";
+import Navbar from "../components/NavBar";
 import AuthProvider from "../components/AuthProvider";
 import { ThemeModeProvider } from "../components/ThemeProvider";
+import { LikesProvider } from "../context/LikesContext";
 
 export const metadata: Metadata = {
   title: "SnapZoška",
@@ -23,8 +24,10 @@ export default function RootLayout({
       <body>
         <ThemeModeProvider>
           <AuthProvider>
-            {children}
-            <Navbar />
+            <LikesProvider>
+              {children}
+              <Navbar />
+            </LikesProvider>
           </AuthProvider>
         </ThemeModeProvider>
       </body>

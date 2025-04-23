@@ -3,7 +3,9 @@
 "use server";
 
 // Import Prisma client
-import { prisma } from "@/app/api/auth/[...nextauth]/prisma";
+import { prisma } from "../api/auth/[...nextauth]/prisma";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/authOptions";
 
 // Fetch all posts
 export const fetchPosts = async () => {
@@ -36,11 +38,21 @@ export const fetchPostsByUserId = async (userId: string) => {
 };
 
 // Create a new post
-export const createPost = async (userId: string, imageUrl: string, caption?: string) => {
+export const createPost = async (userEmail: string, imageUrl: string, caption?: string) => {
   try {
+    // Get user ID from email
+    const user = await prisma.user.findUnique({
+      where: { email: userEmail },
+      select: { id: true }
+    });
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
     const newPost = await prisma.post.create({
       data: {
-        userId,
+        userId: user.id,
         imageUrl,
         caption,
       },

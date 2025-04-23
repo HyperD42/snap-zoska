@@ -1,6 +1,4 @@
-
-
-import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
+import { authOptions } from '../app/api/auth/[...nextauth]/authOptions';
 import { getServerSession } from 'next-auth'; // Adjust this import based on your project structure
 import { redirect } from 'next/navigation'; // Assuming you're using Next.js with the app router
 

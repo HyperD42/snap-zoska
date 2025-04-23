@@ -1,7 +1,7 @@
-import { prisma } from '@/app/api/auth/[...nextauth]/prisma';
+import { prisma } from '../../../app/api/auth/[...nextauth]/prisma';
 import { Typography, Card, CardContent, CardMedia, Box, Link as MuiLink, Avatar, Stack } from '@mui/material';
 import Link from 'next/link';
-import PostActions from '@/components/PostActions';
+import PostActions from '../../../components/PostActions';
 
 export const metadata = { title: 'List Prispevkov | ZoškaSnap' };
 
@@ -34,35 +34,32 @@ export default async function PostList() {
         }}
       >
         {posts.map((post) => (
-          <MuiLink
+          <Card
             key={post.id}
-            component={Link} // Use Next.js Link for routing
-            href={`/prispevok/${post.id}`} // Link to dynamic post page
-            underline="none" // Remove underline from the link
+            sx={{
+              width: '100%',
+              maxWidth: 600,
+              boxShadow: 3,
+              display: 'flex',
+              flexDirection: 'column',
+              margin: '0 auto',
+            }}
           >
-            <Card
-              sx={{
-                width: '100%',
-                maxWidth: 600,
-                boxShadow: 3,
-                display: 'flex',
-                flexDirection: 'column',
-                margin: '0 auto',
-                cursor: 'pointer', // Indicate that the entire card is clickable
-              }}
-            >
-              <CardContent sx={{ padding: 1.5, paddingBottom: 1 }}>
-                <Stack direction="row" spacing={1} alignItems="center">
+            <CardContent sx={{ padding: 1.5, paddingBottom: 1 }}>
+              <Link href={`/profil/${post.user.id}`} style={{ textDecoration: 'none' }}>
+                <Stack direction="row" spacing={1} alignItems="center" sx={{ cursor: 'pointer' }}>
                   <Avatar
                     alt={post.user.name || "User"}
                     src={post.user.image || "/default-avatar.png"}
                     sx={{ width: 32, height: 32 }}
                   />
-                  <Typography variant="subtitle2" sx={{ fontWeight: 'medium' }}>
+                  <Typography variant="subtitle2" sx={{ fontWeight: 'medium', color: 'text.primary' }}>
                     {post.user.name}
                   </Typography>
                 </Stack>
-              </CardContent>
+              </Link>
+            </CardContent>
+            <Link href={`/prispevok/${post.id}`} style={{ textDecoration: 'none' }}>
               {post.imageUrl && (
                 <CardMedia
                   component="img"
@@ -71,17 +68,20 @@ export default async function PostList() {
                   alt="Post image"
                   sx={{
                     objectFit: 'cover',
+                    cursor: 'pointer',
                   }}
                 />
               )}
               <CardContent sx={{ padding: 2 }}>
-                <Typography variant="h6" component="h2" sx={{ fontWeight: 'bold', marginBottom: 1 }}>
+                <Typography variant="h6" component="h2" sx={{ fontWeight: 'bold', marginBottom: 1, color: 'text.primary' }}>
                   {post.caption}
                 </Typography>
-                <PostActions />
               </CardContent>
-            </Card>
-          </MuiLink>
+            </Link>
+            <CardContent sx={{ padding: 2, paddingTop: 0 }}>
+              <PostActions postId={post.id} />
+            </CardContent>
+          </Card>
         ))}
       </Box>
     </Box>

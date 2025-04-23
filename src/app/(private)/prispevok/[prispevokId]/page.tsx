@@ -1,8 +1,8 @@
-import { prisma } from '@/app/api/auth/[...nextauth]/prisma';
-import { Typography, Box, CardMedia, Button, Container } from '@mui/material';
+import { prisma } from '../../../../app/api/auth/[...nextauth]/prisma';
+import { Typography, Box, CardMedia, Button, Container, Card, CardContent, Avatar, Stack, Divider } from '@mui/material';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import PostActions from '@/components/PostActions';
+import PostActions from '../../../../components/PostActions';
 
 interface PostProps {
   params: {
@@ -59,7 +59,7 @@ export default async function PostDetail({ params }: PostProps) {
         </Typography>
 
         <Box sx={{ mb: 3 }}>
-          <PostActions />
+          <PostActions postId={post.id} />
         </Box>
 
         <Link href="/" passHref style={{ textDecoration: 'none' }}>
@@ -75,6 +75,7 @@ export default async function PostDetail({ params }: PostProps) {
               borderRadius: 2,
               textTransform: 'none',
               textAlign: 'center',
+              mt: 4,
               '&:hover': {
                 backgroundColor: 'primary.dark',
               },

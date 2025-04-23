@@ -1,7 +1,6 @@
-
 //src/app/o-mne/page.tsx
 
-import AboutMeView from "@/sections/AboutMeView";
+import AboutMeView from "../../../sections/AboutMeView";
 
 
 export const metadata = { title: 'O mne | ZoškaSnap' };

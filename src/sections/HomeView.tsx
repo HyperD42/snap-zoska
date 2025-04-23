@@ -1,5 +1,5 @@
 import { Button, Container, Typography, Box, Card, CardContent, CardMedia } from "@mui/material";
-import { prisma } from "@/app/api/auth/[...nextauth]/prisma";
+import { prisma } from "../app/api/auth/[...nextauth]/prisma";
 import Link from 'next/link';
 
 const getPosts = async () => {

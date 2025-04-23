@@ -1,6 +1,5 @@
 // cp ~/dev/testing-data/seed-data.json ~/dev/snap-zoska-4h/prisma/seedData/
 
-
 import fs from 'fs';
 import { PrismaClient } from '@prisma/client';
 
@@ -13,7 +12,7 @@ async function seed() {
   // Because of relations, we can create them in the correct order or use createMany.
   for (const item of data) {
     // Create user
-    const createdUser = await prisma.user.create({
+    await prisma.user.create({
       data: {
         id: item.id,
         name: item.name,

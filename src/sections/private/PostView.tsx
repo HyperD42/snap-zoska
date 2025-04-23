@@ -14,7 +14,7 @@ import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 
 // Server action import
-import { fetchPosts } from "@/app/actions/posts";
+import { fetchPosts } from "../../app/actions/posts";
 
 // Post interface
 interface Post {

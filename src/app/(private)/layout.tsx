@@ -2,7 +2,7 @@
 
 import { Metadata } from "next";
 import "../globals.css";
-import AuthGuard from "@/components/AuthGuard";
+import AuthGuard from "../../components/AuthGuard";
 
 export const metadata: Metadata = {
   title: "SnapZoška",
